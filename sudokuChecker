@@ -43,8 +43,13 @@ function getSection (inputGrid, gridXCoordinate, gridYCoordinate) {
 
 
 function checkPuzzle(inputGrid) {
-  // input grid size (# of rows)
+  // input grid size (# of rows) and check that the inputGrid is the right size
   var gridSize = 9;
+  if (inputGrid.length !== gridSize) return `The sudoku puzzle is not the right size!`;
+  for (var k = 0; k < inputGrid.length; k++) {
+    currentElem = inputGrid[k];
+    if (currentElem.length !== gridSize) return `The sudoku puzzle is not the right size!`;
+  }
   
   // create an array of indexes to check each section.
   var sectionCheckArrayOfIndexes = [];
@@ -130,7 +135,7 @@ var puzzle = [[ 8,9,5,   7,4,2,   1,3,6 ],
 
               [ 1,5,9,   8,7,4,   6,2,3 ],
               [ 7,4,6,   3,2,5,   8,1,9 ],
-              [ 3,2,8,   1,9,6,   5,4,7 ]];
+              [ 3,2,8,   1,9,6,   5,4,7 ],];
 
 
 // getRow(puzzle, 8);
