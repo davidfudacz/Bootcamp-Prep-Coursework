@@ -1,0 +1,70 @@
+// We know that to make a copy of an array, we can use the .slice() method.
+
+// But .slice() actually creates a shallow copy of an array. Now that we understand the concepts of pass by reference and pass by value, we can understand this distinction.
+
+// Consider this code:
+
+// var arr = [1,[2,3]];
+// var arrCopy = arr.slice();
+// The variable arrCopy points to a distinct array from arr, but it is a shallow copy because its object type contents are not copies but references.
+
+// The first element is the number 1. That is a copy because it's impossible to have two references to the same number in memory space.
+
+// But the second element is an array, and is in fact the same array that is in the original arr variable. It is a reference, not a copy, so any manipulation we make to that original nested array will be reflected in our nested copy. To see that, run this code:
+
+// var arr = [1,[2,3]];
+// var arrCopy = arr.slice();
+
+// arr[1].push(4);
+// console.log(arrCopy);    // [1,[2,3,4]]
+// When we push a number to the array nested in arr that number was also pushed into the array nested in our copy arrCopy. That's because they are actually two references to the same variable.
+
+// In many cases, this is not the behaviour we want. We want a copy of an array where all of it's nested elements are also copies. This is referred to as a 'deep copy'.
+
+// Write a function to make a 'deeper' copy of an array. A function that created a full deep copy would have to handle any level of nested arrays. For now, focus on writing a function that clones an array and can handle one level of nested arrays.
+
+var arr = [1,[2,3,[4,5,[6,7],8],9]];
+
+function copy (anArray) {
+  var copyArray = [];
+  for (var i = 0; i < anArray.length; i++) {
+    var currentElement = anArray[i];
+    if (Array.isArray(currentElement)) {
+      copyArray.push(copy(currentElement));
+    } else {
+      copyArray.push(currentElement);
+    }
+  }
+  return copyArray;
+}
+
+
+
+var arrCopy = copy(arr);
+
+
+
+
+
+
+arr[1].push(4);
+console.log(arrCopy)    // [1,[2,3]] Copy is not affected!
+
+
+
+
+
+
+// Bonus
+
+// If you've successfully written your 'deeper' copy function, spend some time thinking about how you could write a version that could handle any level of nesting.
+
+// You would want to use recursion. We'll be covering this concept in depth next week, but as you struggle with the problem, think about how helpful it would be if you could indefinitely call your copy function.
+
+// And if you'd like, feel free to take a crack at writing an implementation.
+
+// var arr = [1,[2,3]];
+// var arrCopy = copy(arr);
+
+// arr[1].push(4);
+// console.log(arrCopy)    // [1,[2,3]] Copy is not affected!
