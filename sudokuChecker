@@ -50,6 +50,12 @@ function checkPuzzle(inputGrid) {
     currentElem = inputGrid[k];
     if (currentElem.length !== gridSize) return `The sudoku puzzle is not the right size!`;
   }
+  // check that everything is actually an array.
+  if(!(Array.isArray(inputGrid))) return `The input is not formatted as an array.`;
+  for (var l = 0; l < inputGrid.length; l++) {
+    var currentArray = inputGrid[l];
+    if(!(Array.isArray(currentArray))) return `The input is not formatted as an array.`;
+  }
   
   // create an array of indexes to check each section.
   var sectionCheckArrayOfIndexes = [];
