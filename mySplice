@@ -1,0 +1,31 @@
+// Write a mySplice function that mirrors the behavior of JavaScript's .splice() array method. However, mySplice should accept the array to operate on as an argument, rather than being invoked as a method on that array.
+
+// Try and mirror the behavior of .splice() as closely as possible, but to start with, assume all arguments will be positive integers. Most importantly, your function should have two observable effects: it should modify the array it receives as an argument and it should return an array containing the deleted elements.
+
+// Do not use the native .splice() method in your own implementation.
+
+var myArray = [1,2,3];
+
+function mySplice (anArray, startIndex, deleteCount) {
+  var deletedElemArray = [];
+  var outputArray = [];
+  for (var i = 0; i < startIndex; i++) {
+    deletedElemArray.push(anArray.shift());
+  }
+  
+  for (var j = 0; j < deleteCount; j++) {
+    var currentElem = anArray[i];
+    outputArray.push(anArray.shift());
+  }
+  
+  for (var k = deletedElemArray.length - 1; k >= 0; k--) {
+    var currentElement = deletedElemArray[k];
+    anArray.unshift(currentElement);
+  }
+  
+  return outputArray;
+}
+
+
+console.log("returned elements: ", mySplice(myArray, 1, 1))    // [2]
+console.log(myArray)    // [1,3]
