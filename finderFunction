@@ -1,0 +1,39 @@
+// If we're searching an array for a certain element, we know that we can use the built-in indexOf method. That's perfect when we're searching an array for a specific, concrete value.
+
+// does this array contain the number 3?
+// [1, 2, 3, 4, 5].indexOf(3)   // 2
+// Yes it does!
+// But what if what we're searching for isn't a single, concrete value? For example, what if we wanted to find the index of the first even value in an array? The indexOf method won't be very helpful to us in that case.
+
+// However, now that we're more comfortable with the idea of functions accepting other functions as arguments, we can write a utility method to do the kind of search described above. Our utility function - let's call it finderFunction - can be described as follows. The function should accept two arguments: an array to search and a function to "test" each element of the array. Our finderFunction will search through the array, invoking the passed in function once for each element, passing the element in as an argument. If the function returns true (or a truthy value) for an element, that element matches the criteria we are searching for and we should return its index (just as indexOf returns the index of the first match).
+
+// If our finderFunction doesn't find a match it should return -1, just as the indexOf method does.
+
+var numbers = [1, 3, 5, 64, 7, 12];
+var odds = [9, 13, 15, 17];
+
+function isEven(num) { return !(num % 2); };
+
+function finderFunction(anArray, func) {
+  var arrayOfPassedElems = [];
+  for (var i = 0; i < anArray.length; i++) {
+    var currentElement = anArray[i];
+    if (func(currentElement)) {
+      arrayOfPassedElems.push(currentElement);
+    }
+  }
+  return arrayOfPassedElems ? arrayOfPassedElems : -1;
+}
+
+
+console.log(finderFunction(numbers, isEven)) // 3
+console.log(finderFunction(odds, isEven))   // -1
+// If you write this utility function, congrats! You just implemented part of the functionality provided by the widely used lodash library.
+
+// BONUS CHALLENGE
+
+// Refactor your solution so that finderFunction returns an array of all elements that pass the test, rather than the index of the first element that passes the test.
+
+var evens = finderFunction(numbers, isEven);
+console.log(evens);    // [64, 12]
+// If you write that function, congrats! You just built an implementation of the built in .filter array method, which we'll examine in more depth in a later lecture.
