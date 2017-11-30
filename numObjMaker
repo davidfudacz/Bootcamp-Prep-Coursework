@@ -1,0 +1,33 @@
+// Write a function, numObjMaker, that takes an array of numbers and returns an object with a key "0" and value being the array passed in, and each subsequent key:value pair as key as incrementing numbers from 0 (remember - keys in objects are always strings) and value as an array shifted by the number value of the key. The number of key:value pairs should be the number of unique shifted arrays that can be created. See the three examples below for clarification. The original array should not be mutated.
+
+
+
+function numObjMaker (anArray) {
+  var objectMade = {};
+  //copy array
+  var arrayCopy = anArray.slice();
+  
+  //iterate through
+  for (var i = 0; i < arrayCopy.length; i++) {
+    objectMade[i.toString()] = arrayCopy;
+    arrayCopy.push(arrayCopy.shift());
+  }
+  
+  //return obj
+  return objectMade;
+}
+
+var myArrOne = [1,2,3,4]
+console.log(myArrOne) // [1,2,3,4]
+var myNumObjOne = numObjMaker(myArrOne);
+console.log(myNumObjOne) // {"0": [1,2,3,4], 1":[2,3,4,1], "2":[3,4,1,2], "3":[4,1,2,3]}
+
+// var myArrTwo = [8,2,7,3,5,5];
+// console.log(myArrTwo) // [8,2,7,3,5,5]
+// var myNumObjTwo = numObjMaker(myArrTwo);
+// console.log(myNumObjTwo) // {"0": [8,2,7,3,5,5], "1":[2,7,3,5,5,8], "2":[7,3,5,5,8,2], "3":[3,5,5,8,2,7], "4":[5,5,8,2,7,3], "5":[5,8,2,7,3,5]}
+
+// var myArrThree = [9,1,4,10,78];
+// console.log(myArrThree) // [9,1,4,10,78]
+// var myNumObjThree = numObjMaker(myArrThree);
+// console.log(myNumObjThree) // {"0": [9,1,4,10,78], "1":[1,4,10,78,9], "2":[4,10,78,9,1], "3":[10,78,9,1,4], "4":[78,9,1,4,10]}
