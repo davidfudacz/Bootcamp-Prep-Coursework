@@ -1,0 +1,31 @@
+// Write a function genLoggers that accepts a number and returns an array of that length. Each element in the array should be a function that logs its index in the array.
+
+// Note that this is a bonus problem; you are unlikely to encounter problems this challenging in the admissions process for a coding bootcamp!
+
+// Hint:
+// Logging the right index
+// Click to toggle hint  
+
+function genLoggers(aNum) {
+  var ourArray = [];
+  var innerFunction = function (index) {
+      return function () {
+        console.log(index);
+      }
+    }
+  
+  for (var i = 0; i < aNum; i ++) {
+    ourArray.push(innerFunction(i));
+  }
+  
+  return ourArray;
+}
+
+var loggerArray = genLoggers(5);
+loggerArray[0]();    // 0
+loggerArray[4]();    // 4
+
+
+
+
+// [indexLogger(0), indexLogger(1), ]
