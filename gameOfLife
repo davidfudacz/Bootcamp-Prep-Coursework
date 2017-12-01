@@ -1,0 +1,52 @@
+
+// Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
+// Any live cell with two or three live neighbours lives on to the next generation.
+// Any live cell with more than three live neighbours dies, as if by overpopulation.
+// Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+
+var aliveCell = 0;
+var deadCell = 1;
+var cellsToCheck = [["N", ], ["NE", ], ["E", ], ["SE", ], ["S", ], ["SW", ], ["W", ], ["NW", ]]
+var cellBeingChecked = null;
+
+
+//create the grid
+
+function createRandomGrid(size, percentageOfLiveCells) {
+  var percentage = percentageOfLiveCells / 100;
+  var grid = [];
+  // create rows 
+  for (var i = 0; i < size; i++) {
+    grid.push([]);
+    var currentArray = grid[i];
+    for (var j = 0; j < size; j++) {
+      var numToPush = Math.random() < percentage ? aliveCell : deadCell;
+      currentArray.push(numToPush);
+    }
+  }
+  return grid;
+}
+
+function checkAround(elementToInspect) {
+  var aliveNeighborCount = 0;
+  for (var i = 0, i < cellsToCheck.length; i++) {
+    var currentCell = cellsToCheck[i];
+    var currentCellPosition = currentCell[1];
+    
+    }
+  }
+}
+
+function gameOfLife(grid) {
+  cellBeingChecked = 
+  
+  
+}
+
+
+var gridOfLife = createRandomGrid(20, 10);
+gameOfLife(gridOfLife);
+
+
+
+
