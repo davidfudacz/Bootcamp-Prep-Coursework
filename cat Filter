@@ -1,0 +1,70 @@
+// Write a function, hasWhiteColor, that, when passed into the filter method, filters out any cats who aren't, at least in part, white.
+
+// Then, write a function, hasSafeLevelsOfFuzziness, that, when passed into the filter method, filters out any cats whose fuzziness levels so high they are unsafe!
+
+// Finally, write a helper function logsName that, when chained with the filter method, will log out the name of every cat in the filtered array.
+
+var cats = [{
+  'name': 'Sadie',
+  'age': 9,
+  'colors': ['black', 'peanut butter'],
+  'favorite activity': 'eating',
+  'favorite toy': 'Mr. Mouse',
+  'sound': 'mew',
+  'face': 'perfect',
+  'fuzziness level': 'off the charts'
+}, {
+  'name': 'Layla',
+  'age': 9,
+  'colors': ['grey', 'white', 'black'],
+  'favorite activity': 'alone time',
+  'favorite toy': 'the scratchy post',
+  'sound': 'reowr',
+  'face': 'perfect',
+  'fuzziness level': 'extreme'
+}, {
+  'name': 'Mr. Binns',
+  'age': 4,
+  'colors': ['white', 'black'],
+  'favorite activity': 'furmination time',
+  'favorite toy': 'the jingly feather stick',
+  'sound': 'maaaoww maaow MAAOOW',
+  'face': 'perfect',
+  'fuzziness level': 'unsafe'
+}];
+
+console.log('The cats who are, at least in part, white, are:');
+cats.filter(hasWhiteColor)
+  .forEach(logsName)
+
+/*
+  Layla
+  Mr. Binns
+*/
+
+console.log('The cats who have a safe level of fuzziness are:');
+cats.filter(hasSafeLevelsOfFuzziness)
+  .forEach(logsName);
+
+/*
+  Sadie
+  Layla
+*/
+
+function hasWhiteColor(cat) {
+  var colorElement = cat.colors;
+  for (let i = 0; i < colorElement.length; i++) {
+    var currentElem = colorElement[i];
+    if (currentElem === "white") return true;
+  }
+}
+
+function hasSafeLevelsOfFuzziness(cat) {
+  var fuzzinessLevel = cat['fuzziness level'];
+  if (fuzzinessLevel !== "unsafe") return true;
+}
+
+function logsName(elem) {
+  //TODO
+  console.log(elem.name);
+}
