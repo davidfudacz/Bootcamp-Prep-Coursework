@@ -1,0 +1,61 @@
+// Write a function, logsARandomFact, that will be passed into a .forEach method. The function should log out a random fact from the given cat. You can use the random helper function to help you select a random fact to log out!.
+
+var cats = [{
+  'name': 'Sadie',
+  'age': 9,
+  'color': 'black and peanut butter',
+  'favorite activity': 'eating',
+  'favorite toy': 'Mr. Mouse',
+  'sound': 'mew',
+  'face': 'perfect',
+  'fuzziness level': 'off the charts'
+}, {
+  'name': 'Layla',
+  'age': 9,
+  'color': 'grey and white and black',
+  'favorite activity': 'alone time',
+  'favorite toy': 'the scratchy post',
+  'sound': 'reowr',
+  'face': 'perfect',
+  'fuzziness level': 'extreme'
+}, {
+  'name': 'Mr. Binns',
+  'age': 4,
+  'color': 'white and black',
+  'favorite activity': 'furmination time',
+  'favorite toy': 'the jingly feather stick',
+  'sound': 'maaaoww maaow MAAOOW',
+  'face': 'perfect',
+  'fuzziness level': 'unsafe'
+}];
+
+
+
+
+cats.forEach(logsARandomFact);
+
+/*
+Sadie's sound is mew
+Layla's age is 9
+Mr. Binns's color is white and black
+*/
+
+function logsARandomFact(elem) {
+  var catName = elem.name;
+  var catKeyArray = Object.keys(elem);
+  var catValueArray = Object.values(elem);
+  var randomNum = random(1,7);
+  var catKey = catKeyArray[randomNum];
+  var catFact = catValueArray[randomNum];
+  
+  var output = `${catName}'s ${catKey} is ${catFact}`
+  console.log(output);
+}
+
+function random(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+7-0+1
+
+
+
