@@ -4,10 +4,8 @@
 // Any live cell with more than three live neighbours dies, as if by overpopulation.
 // Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 
-var aliveCell = 0;
+var aliveCell = 8;
 var deadCell = 1;
-var cellsToCheck = [["N", ], ["NE", ], ["E", ], ["SE", ], ["S", ], ["SW", ], ["W", ], ["NW", ]]
-var cellBeingChecked = null;
 
 
 //create the grid
@@ -27,26 +25,99 @@ function createRandomGrid(size, percentageOfLiveCells) {
   return grid;
 }
 
-function checkAround(elementToInspect) {
-  var aliveNeighborCount = 0;
-  for (var i = 0, i < cellsToCheck.length; i++) {
-    var currentCell = cellsToCheck[i];
-    var currentCellPosition = currentCell[1];
-    
-    }
-  }
-}
+
+
+
 
 function gameOfLife(grid) {
-  cellBeingChecked = 
+  
+  function runThroughTheGrid (functionToRun) {
+    var gridSize = grid.length;
+    for (var i = 0; i < gridSize; i++) {
+      var currentArray = grid[i];
+      copyGrid.push([]);
+      for (var j = 0; j < currentArray.length; j++) {
+        functionToRun(j, i);
+      }
+    }
+  }
+  
+  function checkAround(indexOfElementToInspect, indexOfParentArray) {
+    console.log(indexOfParentArray);
+    var W = (indexOfElementToInspect)
+      ? grid[indexOfParentArray][indexOfElementToInspect - 1]
+      : undefined;
+    
+    var E = (indexOfElementToInspect === grid.length - 1) 
+      ? grid[indexOfParentArray][indexOfElementToInspect + 1]
+      : undefined;
+    
+    var NW = ((indexOfElementToInspect) || (indexOfParentArray)) 
+      ? grid[indexOfParentArray - 1][indexOfElementToInspect - 1]
+      : undefined;
+    
+    var N = (indexOfParentArray) 
+      ? grid[indexOfParentArray - 1][indexOfElementToInspect]
+      : undefined;
+    
+    var NE = ((indexOfParentArray) || (indexOfElementToInspect)) 
+      ? grid[indexOfParentArray - 1][indexOfElementToInspect + 1]
+      : undefined;
+    
+    var SW = (grid[indexOfParentArray + 1][indexOfElementToInspect - 1];
+    
+    var S = grid[indexOfParentArray + 1][indexOfElementToInspect];
+    
+    var SE = grid[indexOfParentArray + 1][indexOfElementToInspect + 1];
+    
+    var cellsToCheck = [W, E, NW, N, NE, SW, S, SE];
+    var aliveNeighborCount = 0;
+    var elementToInspect = grid[indexOfParentArray][indexOfElementToInspect];
+    var amIAlive = (elementToInspect === aliveCell);
+    
+    for (var i = 0; i < cellsToCheck.length; i++) {
+      var currentCellBeingChecked = cellsToCheck[i];
+      if (currentCellBeingChecked) {
+        if (currentCellBeingChecked === aliveCell) aliveNeighborCount += 1;
+        
+        changeTheGrid(grid, aliveNeighborCount, amIAlive, indexOfParentArray);
+      }
+    }
+    // console.log(amIAlive);
+    // console.log(aliveNeighborCount);
+  }
+  
+  function changeTheGrid (aliveNeighborCount, amIAlive, indexOfParentArray) {
+    // Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
+    if (amIAlive && aliveNeighborCount < 2) copyArray[indexOfParentArray].push(deadCell);
+    
+  // Any live cell with two or three live neighbours lives on to the next generation.
+    if (amIAlive && aliveNeighborCount === 2) copyArray[indexOfParentArray].push(aliveCell);
+    if (amIAlive && aliveNeighborCount === 3) copyArray[indexOfParentArray].push(aliveCell);
+    
+  // Any live cell with more than three live neighbours dies, as if by overpopulation.
+    if (amIAlive && aliveNeighborCount > 3) copyArray[indexOfParentArray].push(deadCell);
+    
+  // Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+    if (!(amIAlive) && aliveNeighborCount === 3) copyArray[indexOfParentArray].push(aliveCell);
+  
+  }
   
   
+  var copyGrid = [];
+  
+  runThroughTheGrid(checkAround);
+  
+  grid = copyGrid;
+  console.log(grid);
+  return setInterval(gameOfLife(grid), 1000);
 }
 
-
+//initialize the grid
 var gridOfLife = createRandomGrid(20, 10);
+// console.log(gridOfLife);
+// checkAround(gridOfLife, gridOfLife[2][2], 2, 2);
 gameOfLife(gridOfLife);
-
 
 
 
