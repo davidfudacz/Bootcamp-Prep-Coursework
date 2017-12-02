@@ -1,0 +1,14 @@
+// Create a function that takes a number n and returns the nth number in the Fibonacci sequence. The Fibonacci sequence is a series of numbers in which each number is the sum of the two numbers preceding it.
+
+// ex: 1, 1, 2, 3, 5, 8, 13, 21, 34, 55....
+
+fibonacci(3)    // => 8
+
+
+function fibonacci (num) {
+  if (num <= 1) return num;
+  
+  return fibonacci (num - 1) + fibonacci(num - 2);
+}
+
+
