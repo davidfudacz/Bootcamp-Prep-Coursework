@@ -1,0 +1,29 @@
+// Write a fuction that accepts an array and returns the sum of all the numbers in the array (no matter how nested!).
+
+function arraySum(anArray) {
+  sum = 0;
+  for (var i = 0; i < anArray.length; i++) {
+    var currentElement = anArray[i];
+    if (Array.isArray(currentElement)) {
+      return sum += arraySum(currentElement);
+    } else {
+      sum += currentElement;
+    }
+  }
+  
+  return sum;
+}
+
+
+// 1,2,3,4 
+
+
+
+
+
+
+
+
+arraySum([1, [2, 3, [4, 5, [5]]]])    // => 10
+// arraySum([1, 2, 3, 4])    // => 10
+
