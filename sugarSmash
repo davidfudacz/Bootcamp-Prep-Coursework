@@ -1,0 +1,41 @@
+// You are developing the next big mobile game "Sugar Smash", a thinly-disguised knock off of "Candy Crush".
+
+// Write a function that takes and returns a string. If any character is repeated three or more times in a row, remove (or "smash") those characters from the string before returning it. For example:
+
+function sugarSmash (string) {
+  if (!string) return '';
+  // console.log(strArray);
+  var count = 1;
+  // we do <= here to grab the last character
+  for (let i = 1; i <= string.length; i++) {
+    var currentElem = string[i];
+    var previousElem = string[i-1];
+    if (currentElem === previousElem) {
+      count++;
+    } else if (currentElem !== previousElem && count >= 3) {
+      //get rid of the characters, recursion
+      var firstPart = string.slice(0,i-count);
+      var secondPart = string.slice(i);
+      string = firstPart + secondPart;
+      string = sugarSmash(string);
+    } else if (currentElem !== previousElem) {
+      count = 1;
+    }
+  }
+  return string;
+}
+
+
+
+// sugarSmash('abbccca'); // => 'aabba'
+// Things get interesting when you have to chain multiple "smashes" together. For example:
+
+// sugarSmash('abbcccbaa');
+// smash the c's and you're left with 'abbba'
+// smash the b's and you're left with 'aa'
+// Use recursion to make sure the game keeps smashing characters until the string has reached a stable state and no more smashing is required!
+
+// Here are some interesting test cases you can use to see if your game is ready for the app store:
+
+sugarSmash('aaabbcccbddeefffedbffgfffgg'); // => 'bff'
+sugarSmash('aabbccddeeffgghhiijjkkllmmnnooppponmlkjihgfedcba'); // => ''
