@@ -1,0 +1,32 @@
+// Write a function pumpkinPicker that, given a deeply-nested object, returns the count of the number of 'pumpkin' strings stored as a value in any of the nested objects.
+
+function pumpkinPicker (anObj) {
+  
+  var values = Object.values(anObj);
+  count = 0;
+  values.forEach(function (value) {
+    if (value === 'pumpkin') count += 1;
+    if (typeof(value) === 'object') count += pumpkinPicker(value);
+    console.log(count);
+    return count;
+  });
+  return count;
+}
+
+
+
+var pumpkinPatch = {
+  meadow: {
+    byTheRock: 'apples',
+    byThePuddle: 'pumpkin'
+  },
+  hill: {
+    byTheBench: {
+      leftOfBench: 'pumpkin',
+      rightOfBench: 'pumpkin'
+    },
+    topOfHill: 'apples'
+  }
+};
+
+pumpkinPicker(pumpkinPatch); // => 3
