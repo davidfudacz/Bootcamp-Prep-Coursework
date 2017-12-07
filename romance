@@ -1,0 +1,76 @@
+function textCleaner (string) {
+  string = string
+    .trim()
+    .toLowerCase()
+    .split('')
+    .filter(function(elem) {
+      var notAllowed = ';:,.!?';
+      return (notAllowed.indexOf(elem) === -1);
+    })
+    .join('')
+    .split(' ');
+    return string;
+    
+}
+
+function generateWordPairs (stringArray) {
+  var wordObj = {};
+  for (var i = 0; i < stringArray.length; i++) {
+    var currentElem = stringArray[i];
+    var nextElem = stringArray[i+1];
+    var value = wordObj[currentElem];
+    if (i !== stringArray.length - 1) {
+      if (value) {
+        wordObj[currentElem].push(nextElem);
+      } else {
+        wordObj[currentElem] = [nextElem];
+      }
+    }
+    
+  }
+  return wordObj;
+}
+
+
+function writeLine (anObj, numOfWords) {
+  var keys = Object.keys(anObj);
+  
+  function randomNumber () {
+    return Math.random();
+  }
+  
+  var randomNumber = randomNumber();
+  
+  function pickAWord (anArray) {
+    var random = Math.floor(randomNumber * anArray.length);
+    var randomKey = anArray[random];
+    return randomKey;
+  }
+  
+  var randomKey = pickAWord(keys);
+  var randomArray = anObj[randomKey];
+  
+  var word = randomArray[Math.floor(randomNumber * randomArray.length)];
+  
+  var poem = word;
+  
+  function pickTheNextWord (anObj, word) {
+    
+  }
+  
+  for (var i = 1; i < numOfWords; i++) {
+    
+  }
+  
+}
+
+var myStr = "Ever since I left the city, you, you, you You and me we just don't get along You make me feel like I did you wrong Going places where you don't belong Ever since I left the city, you, you got exactly what you asked for Running out of pages in your passport Hanging with some girls I've never seen before"
+
+var strToPass = textCleaner(myStr);
+
+var wordObject = generateWordPairs(strToPass);
+
+writeLine(wordObject,10);
+
+
+
